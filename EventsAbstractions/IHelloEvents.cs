@@ -7,4 +7,7 @@
 /// </summary>
 public interface IHelloEvents
 {
+    ValueTask Name(string name);
+    ValueTask Color(ConsoleColor color);
+    ValueTask Star();
 }
