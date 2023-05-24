@@ -5,4 +5,12 @@
 
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EventSourcing.Backbone.Channels.RedisProducerProvider" Version="1.2.60" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConsumingEvents\ConsumingEvents.csproj" />
+  </ItemGroup>
+
 </Project>

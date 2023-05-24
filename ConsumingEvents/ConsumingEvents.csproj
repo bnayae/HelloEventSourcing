@@ -4,4 +4,12 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EventSourcing.Backbone.Channels.RedisConsumerProvider" Version="1.2.60" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EventsAbstractions\EventsAbstractions.csproj" />
+  </ItemGroup>
+
 </Project>
