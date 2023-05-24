@@ -2,8 +2,6 @@
 
 using EventSourcing.Backbone;
 
-using System;
-
 Console.WriteLine("Producing events");
 
 IHelloEventsProducer producer = RedisProducerBuilder.Create()
@@ -44,10 +42,10 @@ while (!Console.KeyAvailable || Console.ReadKey(true).Key == ConsoleKey.Escape)
         ConsoleKey.D9 => 9000,
         _ => 0
     };
-    if(delay != 0)
-    await Task.Delay(delay);
+    if (delay != 0)
+        await Task.Delay(delay);
     Console.ForegroundColor = color;
     Console.Write("☆");
 }
 
-Console.WriteLine( " Done");
+Console.WriteLine(" Done");

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EventSourcing.Backbone.Channels.RedisProducerProvider" Version="1.2.60" />
+    <PackageReference Include="EventSourcing.Backbone.Channels.RedisProducerProvider" Version="1.2.62" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="EventSourcing.Backbone.Abstractions" Version="1.2.60" />
-    <PackageReference Include="EventSourcing.Backbone.SrcGen" Version="1.2.60" />
+    <PackageReference Include="EventSourcing.Backbone.Abstractions" Version="1.2.62" />
+    <PackageReference Include="EventSourcing.Backbone.SrcGen" Version="1.2.62" />
   </ItemGroup>
 </Project>
