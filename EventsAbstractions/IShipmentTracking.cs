@@ -14,7 +14,8 @@ namespace EventSourcing.Demo;
 [Obsolete("Either use the Producer or Consumer version of this interface", true)]
 public interface IShipmentTracking
 {
-    ValueTask OrderPlacedAsync(User user, Product product, DateTimeOffset time);
+    // the following method will be ValueTask<EventKeys> OrderPlacedAsync(...) at the producer interface and ValueTask OrderPlacedAsync(...) at the consumer
+    void OrderPlaced(User user, Product product, DateTimeOffset time);
     ValueTask PackingAsync(string email, int productId, DateTimeOffset time);
     ValueTask OnDeliveryAsync(string email, int productId, DateTimeOffset time);
     ValueTask OnReceivedAsync(string email, int productId, DateTimeOffset time);
