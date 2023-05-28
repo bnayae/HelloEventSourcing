@@ -1,7 +1,6 @@
-﻿namespace EventsAbstractions
+﻿namespace EventSourcing.Demo;
+
+public class URIs
 {
-    public class URIs
-    {
-        public const string Default = "hello.event-sourcing";
-    }
+    public const string Default = "hello-event-sourcing";
 }

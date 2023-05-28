@@ -10,7 +10,7 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EventSourcing.Backbone.Channels.RedisConsumerProvider" Version="1.2.62" />
+    <PackageReference Include="EventSourcing.Backbone.Channels.RedisConsumerProvider" Version="1.2.70" />
   </ItemGroup>
 	<ItemGroup>
 		<None Update="icon.png">

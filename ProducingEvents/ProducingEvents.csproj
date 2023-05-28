@@ -2,15 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="EventSourcing.Backbone.Channels.RedisProducerProvider" Version="1.2.62" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ConsumingEvents\ConsumingEvents.csproj" />
-  </ItemGroup>
-
+	
+	<ItemGroup>
+		<PackageReference Include="EventSourcing.Backbone.Channels.RedisProducerProvider" Version="1.2.70" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\EventsAbstractions\EventsAbstractions.csproj" />
+	</ItemGroup>
 </Project>

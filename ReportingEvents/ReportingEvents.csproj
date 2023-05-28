@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EventSourcing.Backbone.Channels.RedisConsumerProvider" Version="1.2.70" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EventsAbstractions\EventsAbstractions.csproj" />
+  </ItemGroup>
+
+</Project>
