@@ -1,3 +1,3 @@
 ﻿namespace EventSourcing.Demo;
 
-public record Product (int id, string name, double price);
+public record Product(int id, string name, double price);

@@ -1,5 +1,5 @@
-﻿using EventSourcing.Demo;
-using EventSourcing.Backbone;
+﻿using EventSourcing.Backbone;
+using EventSourcing.Demo;
 
 Console.WriteLine("Interactive Events");
 

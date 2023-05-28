@@ -1,5 +1,4 @@
-﻿
-using EventSourcing.Backbone;
+﻿using EventSourcing.Backbone;
 using EventSourcing.Demo;
 
 
@@ -13,7 +12,7 @@ IShipmentTrackingProducer producer = RedisProducerBuilder.Create()
 Console.Write("What is your name? ");
 string name = Console.ReadLine() ?? "someone";
 Console.Write("What is your email? ");
-string email = Console.ReadLine() ?? "someone@gmail.com" ;
+string email = Console.ReadLine() ?? "someone@gmail.com";
 User user = new(1, email, name);
 
 foreach (ProductList p in Enum.GetValues(typeof(ProductList)))
@@ -26,4 +25,4 @@ foreach (ProductList p in Enum.GetValues(typeof(ProductList)))
 }
 
 
-Console.WriteLine(" Done");
+Console.WriteLine("Done");

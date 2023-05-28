@@ -1,5 +1,5 @@
-﻿using EventSourcing.Demo;
-using EventSourcing.Backbone;
+﻿using EventSourcing.Backbone;
+using EventSourcing.Demo;
 
 Console.WriteLine("Consuming Events / Reporting");
 
@@ -8,4 +8,4 @@ IConsumerLifetime subscription = RedisConsumerBuilder.Create()
                                             .Group("sample-hello-world:report")
                                             .SubscribeShipmentTrackingConsumer(Subscription.Instance);
 
-Console.ReadKey(false);
+await subscription.Completion;
