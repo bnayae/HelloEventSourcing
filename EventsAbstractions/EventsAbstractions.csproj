@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <PackageReference Include="EventSourcing.Backbone.Abstractions" Version="1.2.74" />
+    <PackageReference Include="EventSourcing.Backbone.Channels.S3StoreProvider.Common" Version="1.2.74" />
     <PackageReference Include="EventSourcing.Backbone.SrcGen" Version="1.2.74" />
   </ItemGroup>
 </Project>

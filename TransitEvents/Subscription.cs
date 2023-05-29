@@ -5,7 +5,8 @@ class Subscription : IShipmentTrackingConsumer
 {
     public static readonly Subscription Instance = new Subscription();
     private readonly IShipmentTrackingProducer _producer = RedisProducerBuilder.Create()
-                                .Uri(URIs.Default)
+                                .AddS3Strategy() // <- this one set the S3 as the event-source storage
+                                .Uri(Constants.URI)
                                 .BuildShipmentTrackingProducer();
     private readonly Random _rnd = new Random();
 

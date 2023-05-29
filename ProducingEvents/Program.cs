@@ -6,7 +6,12 @@ using EventSourcing.Demo;
 Console.WriteLine("Producing events");
 
 IShipmentTrackingProducer producer = RedisProducerBuilder.Create()
-                                .Uri(URIs.Default)
+                                .AddS3Strategy( // <- this one set the S3 as the event-source storage
+                                        Constants.S3Options, 
+                                        envAccessKey: Constants.S3_ACCESS_KEY_ENV, 
+                                        envSecretKey: Constants.S3_SECRET_ENV,
+                                        envRegion: Constants.S3_REGION_ENV )
+                                .Uri(Constants.URI)
                                 .BuildShipmentTrackingProducer();
 
 Console.Write("What is your name? ");
@@ -21,6 +26,7 @@ foreach (ProductList p in Enum.GetValues(typeof(ProductList)))
     string prodName = p.ToString();
     var product = new Product(prodName.GetHashCode(), prodName, price);
     await producer.OrderPlacedAsync(user, product, DateTimeOffset.UtcNow);
+    await Console.Out.WriteLineAsync($"{p} order has placed");
     await Task.Delay(1000);
 }
 
