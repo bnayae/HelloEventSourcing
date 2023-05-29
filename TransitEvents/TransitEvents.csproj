@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="EventSourcing.Backbone.Channels.RedisConsumerProvider" Version="1.2.74" />
     <PackageReference Include="EventSourcing.Backbone.Channels.RedisProducerProvider" Version="1.2.74" />
+    <PackageReference Include="EventSourcing.Backbone.Channels.S3StoreConsumerProvider" Version="1.2.74" />
   </ItemGroup>
 
   <ItemGroup>
