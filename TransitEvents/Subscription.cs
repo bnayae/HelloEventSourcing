@@ -17,6 +17,7 @@ class Subscription : IShipmentTrackingConsumer
     public async ValueTask OrderPlacedAsync(User user, Product product, DateTimeOffset time)
     {
         await Console.Out.WriteLineAsync($"{user.name} order a {product.name}, [product id = {product.id}]");
+        //await Ack.Current.AckAsync(); // acknowledge the message as successfully handled (will start processing next message). It introduce parallelism in a risk of losing the message on unexpected failure
         await Delay();
         await _producer.PackingAsync(user.email, product.id, DateTimeOffset.Now);
     }
@@ -24,6 +25,7 @@ class Subscription : IShipmentTrackingConsumer
     public async ValueTask PackingAsync(string email, int productId, DateTimeOffset time)
     {
         await Console.Out.WriteLineAsync($"Packing [product id = {productId}] for {email}");
+        //await Ack.Current.AckAsync(); // acknowledge the message as successfully handled (will start processing next message). It introduce parallelism in a risk of losing the message on unexpected failure
         await Delay();
         await _producer.OnDeliveryAsync(email, productId, DateTimeOffset.Now);
     }
@@ -31,6 +33,7 @@ class Subscription : IShipmentTrackingConsumer
     public async ValueTask OnDeliveryAsync(string email, int productId, DateTimeOffset time)
     {
         await Console.Out.WriteLineAsync($"Delivery of [product id = {productId}] for {email}");
+        //await Ack.Current.AckAsync(); // acknowledge the message as successfully handled (will start processing next message). It introduce parallelism in a risk of losing the message on unexpected failure
         await Delay();
         await _producer.OnReceivedAsync(email, productId, DateTimeOffset.Now);
     }
