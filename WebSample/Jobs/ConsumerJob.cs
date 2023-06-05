@@ -46,7 +46,7 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
     /// Start Consumer Job.
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
-    async Task IHostedService.StartAsync(CancellationToken cancellationToken)
+    Task IHostedService.StartAsync(CancellationToken cancellationToken)
     {
         _cancellationTokenSource = new CancellationTokenSource();
         var canellation =  CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cancellationTokenSource.Token);
@@ -56,7 +56,7 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
                                 // this extension is generate (if you change the interface use the correlated new generated extension method)
                                 .SubscribeShipmentTrackingConsumer(_subscriber);
 
-        await _subscription.Completion;
+        return Task.CompletedTask;
     }
 
     #endregion // OnStartAsync
@@ -118,14 +118,19 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
         /// <param name="product">The product.</param>
         /// <param name="time">The time.</param>
         /// <returns></returns>
-        ValueTask IShipmentTrackingConsumer.OrderPlacedAsync(User user, Product product, DateTimeOffset time)
+        async ValueTask IShipmentTrackingConsumer.OrderPlacedAsync(User user, Product product, DateTimeOffset time)
         {
             // get the current event metadata
-            Metadata? meta = ConsumerMetadata.Context;
+            ConsumerMetadata consumerMeta = ConsumerMetadata.Context!;
+            Metadata meta = consumerMeta;
+
            
             _logger.LogInformation("handling OrderPlaced [{message-id}]: email: {email}, product: {productId}, which produce at {time}", meta.MessageId, user.email, product.id, time);
-            return ValueTask.CompletedTask;
+
+            // you need it when setting the consumer options to AckBehavior = AckBehavior.Manual
+            await Ack.Current.AckAsync();
         }
+
 
         /// <summary>
         /// Handle [Packings] event.
@@ -134,13 +139,15 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
         /// <param name="productId">The product identifier.</param>
         /// <param name="time">The time.</param>
         /// <returns></returns>
-        ValueTask IShipmentTrackingConsumer.PackingAsync(string email, int productId, DateTimeOffset time)
+        async ValueTask IShipmentTrackingConsumer.PackingAsync(string email, int productId, DateTimeOffset time)
         {
             // get the current event metadata
-            Metadata? meta = ConsumerMetadata.Context;
+            ConsumerMetadata consumerMeta = ConsumerMetadata.Context!;
+            Metadata meta = consumerMeta;
 
             _logger.LogInformation("handling Packing [{message-id}]: email: {email}, product: {productId}, which produce at {time}", meta.MessageId, email, productId, time);
-            return ValueTask.CompletedTask;
+            // you need it when setting the consumer options to AckBehavior = AckBehavior.Manual
+            await Ack.Current.AckAsync();
         }
 
         /// <summary>
@@ -150,13 +157,15 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
         /// <param name="productId">The product identifier.</param>
         /// <param name="time">The time.</param>
         /// <returns></returns>
-        ValueTask IShipmentTrackingConsumer.OnDeliveryAsync(string email, int productId, DateTimeOffset time)
+        async ValueTask IShipmentTrackingConsumer.OnDeliveryAsync(string email, int productId, DateTimeOffset time)
         {
             // get the current event metadata
-            Metadata? meta = ConsumerMetadata.Context;
+            ConsumerMetadata consumerMeta = ConsumerMetadata.Context!;
+            Metadata meta = consumerMeta;
 
             _logger.LogInformation("handling OnDelivery [{message-id}]: email: {email}, product: {productId}, which produce at {time}", meta.MessageId, email, productId, time);
-            return ValueTask.CompletedTask;
+            // you need it when setting the consumer options to AckBehavior = AckBehavior.Manual
+            await Ack.Current.AckAsync();
         }
 
         /// <summary>
@@ -166,13 +175,15 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
         /// <param name="productId">The product identifier.</param>
         /// <param name="time">The time.</param>
         /// <returns></returns>
-        ValueTask IShipmentTrackingConsumer.OnReceivedAsync(string email, int productId, DateTimeOffset time)
+        async ValueTask IShipmentTrackingConsumer.OnReceivedAsync(string email, int productId, DateTimeOffset time)
         {
             // get the current event metadata
-            Metadata? meta = ConsumerMetadata.Context;
-           
+            ConsumerMetadata consumerMeta = ConsumerMetadata.Context!;
+            Metadata meta = consumerMeta;
+
             _logger.LogInformation("handling OnReceived [{message-id}]: email: {email}, product: {productId}, which produce at {time}", meta.MessageId, email, productId, time);
-            return ValueTask.CompletedTask;
+            // you need it when setting the consumer options to AckBehavior = AckBehavior.Manual
+            await Ack.Current.AckAsync();
         }
     }
 

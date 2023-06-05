@@ -88,7 +88,7 @@ namespace WebSample.Extensions
 
             bool OpenTelemetryFilter(HttpContext context)
             {
-                string path = context.Request.Path.Value;
+                string? path = context.Request.Path.Value;
                 return telemetryPathFilter?.Invoke(path) ?? OpenTelemetryFilterMap(path);
             }
 

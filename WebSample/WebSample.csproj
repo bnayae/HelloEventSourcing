@@ -8,25 +8,21 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="EventSourcing.Backbone.Channels.RedisProducerProvider" Version="1.2.80" />
-		<PackageReference Include="EventSourcing.Backbone.Channels.S3StoreProducerProvider" Version="1.2.82" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="EventSourcing.Backbone.Channels.RedisConsumerProvider" Version="1.2.80" />
-		<PackageReference Include="EventSourcing.Backbone.Channels.S3StoreConsumerProvider" Version="1.2.80" />
+		<PackageReference Include="EventSourcing.Backbone.Channels.RedisProducerProvider" Version="1.2.94" />
+		<PackageReference Include="EventSourcing.Backbone.Channels.S3StoreProducerProvider" Version="1.2.94" />
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="EventSourcing.Backbone.Channels.RedisConsumerProvider" Version="1.2.80" />
-		<PackageReference Include="EventSourcing.Backbone.Channels.S3StoreConsumerProvider" Version="1.2.80" />
+		<PackageReference Include="EventSourcing.Backbone.Channels.RedisConsumerProvider" Version="1.2.94" />
+		<PackageReference Include="EventSourcing.Backbone.Channels.S3StoreConsumerProvider" Version="1.2.94" />
 	</ItemGroup>
 	
 	<ItemGroup>
+		<PackageReference Include="AWSSDK.S3" Version="3.7.104.27" />
 		<PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
 	</ItemGroup>
 

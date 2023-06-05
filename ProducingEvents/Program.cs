@@ -6,7 +6,7 @@ using EventSourcing.Demo;
 Console.WriteLine("Producing events");
 
 IShipmentTrackingProducer producer = RedisProducerBuilder.Create()
-                                .AddS3Strategy( // <- this one set the S3 as the event-source storage
+                                .AddS3Storage( // <- this one set the S3 as the event-source storage
                                         Constants.S3Options)
                                 .Uri(Constants.URI)
                                 .BuildShipmentTrackingProducer();
