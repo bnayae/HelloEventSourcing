@@ -12,25 +12,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="EventSourcing.Backbone.Channels.RedisProducerProvider" Version="1.2.94" />
-		<PackageReference Include="EventSourcing.Backbone.Channels.S3StoreProducerProvider" Version="1.2.94" />
+		<PackageReference Include="EventSourcing.Backbone.Channels.RedisProducerProvider" Version="1.2.103" />
+		<PackageReference Include="EventSourcing.Backbone.Channels.S3StoreProducerProvider" Version="1.2.103" />
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="EventSourcing.Backbone.Channels.RedisConsumerProvider" Version="1.2.94" />
-		<PackageReference Include="EventSourcing.Backbone.Channels.S3StoreConsumerProvider" Version="1.2.94" />
+		<PackageReference Include="EventSourcing.Backbone.Channels.RedisConsumerProvider" Version="1.2.103" />
+		<PackageReference Include="EventSourcing.Backbone.Channels.S3StoreConsumerProvider" Version="1.2.103" />
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="AWSSDK.S3" Version="3.7.104.27" />
+		<PackageReference Include="AWSSDK.S3" Version="3.7.104.28" />
 		<PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="OpenTelemetry" Version="1.4.0" />
-		<PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.4.0" />
-		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.4.0" />
-		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.4.0" />
+		<PackageReference Include="OpenTelemetry" Version="1.5.0" />
+		<PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.5.0" />
+		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.5.0" />
+		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.5.0" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.14" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.14" />
 	</ItemGroup>
