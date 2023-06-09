@@ -27,7 +27,7 @@ public class ProducerController : ControllerBase
     /// <returns></returns>
     [HttpPost("order-placed")]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<string> PostOrderPlacedAsync([FromBody]OrderPayload payload)
+    public async Task<string> PostOrderPlacedAsync([FromBody] OrderPayload payload)
     {
         var (user, product) = payload;
         _logger.LogDebug("Sending order-placed event");
@@ -42,7 +42,7 @@ public class ProducerController : ControllerBase
     /// <returns></returns>
     [HttpPost("packing")]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<string> PostPackingAsync([FromBody]StatePayload payload)
+    public async Task<string> PostPackingAsync([FromBody] StatePayload payload)
     {
         var (email, productId) = payload;
         _logger.LogDebug("Sending packing event");
@@ -57,7 +57,7 @@ public class ProducerController : ControllerBase
     /// <returns></returns>
     [HttpPost("on-delivery")]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<string> PostOnDeliveryAsync([FromBody]StatePayload payload)
+    public async Task<string> PostOnDeliveryAsync([FromBody] StatePayload payload)
     {
         var (email, productId) = payload;
         _logger.LogDebug("Sending on-delivery event");

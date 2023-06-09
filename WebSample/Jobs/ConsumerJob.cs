@@ -1,11 +1,6 @@
-﻿using System.Text.Json;
-using System.Threading;
-
-using EventSourcing.Backbone;
+﻿using EventSourcing.Backbone;
 using EventSourcing.Backbone.Building;
 using EventSourcing.Demo;
-
-using Microsoft.Extensions.Hosting;
 
 namespace WebSample;
 
@@ -14,7 +9,7 @@ namespace WebSample;
 /// </summary>
 /// <seealso cref="Microsoft.Extensions.Hosting.HostedServiceBase" />
 /// <seealso cref="System.IDisposable" />
-public sealed class ConsumerJob : IHostedService, IAsyncDisposable
+public sealed class ConsumerJob : IHostedService
 {
     private readonly IConsumerSubscribeBuilder _builder;
     private CancellationTokenSource? _cancellationTokenSource;
@@ -32,7 +27,7 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
     /// <param name="producer">The producer.</param>
     public ConsumerJob(
         ILogger<ConsumerJob> logger,
-        IConsumerReadyBuilder consumerBuilder)        
+        IConsumerReadyBuilder consumerBuilder)
     {
         _builder = consumerBuilder.WithLogger(logger);
         _subscriber = new Subscriber(logger);
@@ -49,7 +44,7 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
     Task IHostedService.StartAsync(CancellationToken cancellationToken)
     {
         _cancellationTokenSource = new CancellationTokenSource();
-        var canellation =  CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cancellationTokenSource.Token);
+        var canellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cancellationTokenSource.Token);
         _subscription = _builder
                                 // .Group(CONSUMER_GROUP)
                                 .WithCancellation(canellation.Token)
@@ -76,20 +71,6 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
 
     #endregion // StopAsync
 
-    #region DisposeAsync
-
-    /// <summary>
-    /// Disposes the asynchronous.
-    /// </summary>
-    /// <returns></returns>
-    async ValueTask IAsyncDisposable.DisposeAsync()
-    {
-        _cancellationTokenSource?.CancelSafe();
-        await (_subscription?.Completion ?? Task.CompletedTask);
-    }
-
-    #endregion // DisposeAsync
-
     #region class Subscriber : IShipmentTrackingConsumer
 
     /// <summary>
@@ -105,7 +86,6 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
         /// </summary>
         /// <param name="logger">The logger.</param>
         public Subscriber(
-            //ConsumerMetadata metadata,
             ILogger logger)
         {
             _logger = logger;
@@ -118,21 +98,15 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
         /// <param name="product">The product.</param>
         /// <param name="time">The time.</param>
         /// <returns></returns>
-        async ValueTask IShipmentTrackingConsumer.OrderPlacedAsync(
+        ValueTask IShipmentTrackingConsumer.OrderPlacedAsync(
             ConsumerMetadata consumerMetadata,
             User user,
             Product product,
             DateTimeOffset time)
         {
-            // get the current event metadata
-            ConsumerMetadata consumerMeta = ConsumerMetadata.Context!;
-            Metadata meta = consumerMeta;
-
-           
+            Metadata meta = consumerMetadata;
             _logger.LogInformation("handling OrderPlaced [{message-id}]: email: {email}, product: {productId}, which produce at {time}", meta.MessageId, user.email, product.id, time);
-
-            // you need it when setting the consumer options to AckBehavior = AckBehavior.Manual
-            await Ack.Current.AckAsync();
+            return ValueTask.CompletedTask;
         }
 
 
@@ -143,19 +117,15 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
         /// <param name="productId">The product identifier.</param>
         /// <param name="time">The time.</param>
         /// <returns></returns>
-        async ValueTask IShipmentTrackingConsumer.PackingAsync(
+        ValueTask IShipmentTrackingConsumer.PackingAsync(
             ConsumerMetadata consumerMetadata,
             string email,
             int productId,
             DateTimeOffset time)
         {
-            // get the current event metadata
-            ConsumerMetadata consumerMeta = ConsumerMetadata.Context!;
-            Metadata meta = consumerMeta;
-
+            Metadata meta = consumerMetadata;
             _logger.LogInformation("handling Packing [{message-id}]: email: {email}, product: {productId}, which produce at {time}", meta.MessageId, email, productId, time);
-            // you need it when setting the consumer options to AckBehavior = AckBehavior.Manual
-            await Ack.Current.AckAsync();
+            return ValueTask.CompletedTask;
         }
 
         /// <summary>
@@ -165,19 +135,15 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
         /// <param name="productId">The product identifier.</param>
         /// <param name="time">The time.</param>
         /// <returns></returns>
-        async ValueTask IShipmentTrackingConsumer.OnDeliveryAsync(
+        ValueTask IShipmentTrackingConsumer.OnDeliveryAsync(
             ConsumerMetadata consumerMetadata,
             string email,
             int productId,
             DateTimeOffset time)
         {
-            // get the current event metadata
-            ConsumerMetadata consumerMeta = ConsumerMetadata.Context!;
-            Metadata meta = consumerMeta;
-
+            Metadata meta = consumerMetadata;
             _logger.LogInformation("handling OnDelivery [{message-id}]: email: {email}, product: {productId}, which produce at {time}", meta.MessageId, email, productId, time);
-            // you need it when setting the consumer options to AckBehavior = AckBehavior.Manual
-            await Ack.Current.AckAsync();
+            return ValueTask.CompletedTask;
         }
 
         /// <summary>
@@ -187,19 +153,15 @@ public sealed class ConsumerJob : IHostedService, IAsyncDisposable
         /// <param name="productId">The product identifier.</param>
         /// <param name="time">The time.</param>
         /// <returns></returns>
-        async ValueTask IShipmentTrackingConsumer.OnReceivedAsync(
+        ValueTask IShipmentTrackingConsumer.OnReceivedAsync(
             ConsumerMetadata consumerMetadata,
             string email,
             int productId,
             DateTimeOffset time)
         {
-            // get the current event metadata
-            ConsumerMetadata consumerMeta = ConsumerMetadata.Context!;
-            Metadata meta = consumerMeta;
-
+            Metadata meta = consumerMetadata;
             _logger.LogInformation("handling OnReceived [{message-id}]: email: {email}, product: {productId}, which produce at {time}", meta.MessageId, email, productId, time);
-            // you need it when setting the consumer options to AckBehavior = AckBehavior.Manual
-            await Ack.Current.AckAsync();
+            return ValueTask.CompletedTask;
         }
     }
 

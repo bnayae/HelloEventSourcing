@@ -1,10 +1,9 @@
-﻿using Amazon.Runtime.CredentialManagement;
+﻿using Amazon;
 using Amazon.Runtime;
+using Amazon.Runtime.CredentialManagement;
 using Amazon.S3;
 
 using EventSourcing.Backbone;
-using Amazon;
-using System.Net.Sockets;
 
 namespace EventSourcing.Demo;
 

@@ -1,5 +1,4 @@
 ﻿using EventSourcing.Backbone;
-using EventSourcing.Demo;
 
 // Configuration: https://medium.com/@gparlakov/the-confusion-of-asp-net-configuration-with-environment-variables-c06c545ef732
 
@@ -18,7 +17,7 @@ namespace WebSample.Extensions
         /// <param name="uri">The URI.</param>
         /// <param name="env">The environment.</param>
         /// <returns></returns>
-        public static IServiceCollection AddShipmentTrackingConsumer
+        public static IServiceCollection AddConsumer
             (
             this IServiceCollection services,
             string uri,
@@ -29,7 +28,7 @@ namespace WebSample.Extensions
             services.AddSingleton(ioc =>
             {
                 IConsumerReadyBuilder consumer =
-                           ioc.ResolveRedisConsumerChannel()
+                            ioc.ResolveRedisConsumerChannel()
                                 .ResolveS3Storage(s3Options)
                                 .WithOptions(o => o with
                                 {

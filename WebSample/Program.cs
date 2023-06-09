@@ -5,8 +5,6 @@ using Amazon.S3;
 
 using OpenTelemetry.Trace;
 
-using StackExchange.Redis;
-
 using WebSample;
 using WebSample.Extensions;
 using WebSample.Extensions.ShipmentTracking;
@@ -17,8 +15,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
 builder.Services.AddAWSService<IAmazonS3>();
 builder.Services.AddEventSourceRedisConnection();
-
-// Add services to the container.
 
 IWebHostEnvironment environment = builder.Environment;
 string env = environment.EnvironmentName;
@@ -31,7 +27,7 @@ string URI = "shipment-tracking";
 string s3Bucket = "shipment-tracking-sample";
 
 builder.Services.AddShipmentTrackingProducer(URI, s3Bucket, env);
-builder.Services.AddShipmentTrackingConsumer(URI, s3Bucket, env);
+builder.Services.AddConsumer(URI, s3Bucket, env);
 
 builder.Services.AddHostedService<ConsumerJob>();
 
